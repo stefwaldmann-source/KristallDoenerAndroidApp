@@ -1,0 +1,7 @@
+In dieser ZIP ist das fertige Android-Studio-Projekt.
+Eine APK konnte in dieser Umgebung nicht kompiliert werden, weil hier kein Android SDK/Gradle installiert ist.
+
+Zum APK-Bauen:
+1. Android Studio öffnen
+2. Ordner KristallDoenerAndroid öffnen
+3. Build > Build Bundle(s) / APK(s) > Build APK(s)

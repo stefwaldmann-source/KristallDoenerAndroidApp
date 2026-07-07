@@ -1,0 +1,20 @@
+UPLOAD-ANLEITUNG FÜR GITHUB
+
+1. Diese ZIP entpacken.
+2. In deinem GitHub Repository "KristallDoenerAndroid" alle alten Dateien markieren und löschen ODER vorhandene Dateien ersetzen.
+3. Den kompletten INHALT aus dem entpackten Ordner hochladen:
+   - app/
+   - .github/
+   - build.gradle
+   - settings.gradle
+   - gradle.properties
+   - README.md
+   - README_DE.md
+   - app_icon_1024.png
+   - build_apk_hinweis.txt
+4. Wichtig: Der Ordner .github/workflows/android.yml muss vorhanden sein.
+5. Danach auf GitHub: Actions > Build APK > Run workflow.
+6. Nach grünem Haken bei Artifacts die APK herunterladen.
+
+FEHLER VON VORHER IST BEHOBEN:
+Die falsche Zeile android:postSplashScreenTheme wurde entfernt.
