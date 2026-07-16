@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kristall Steak Döner Lieferdienst App</title>
+  <meta name="description" content="GitHub-Prototyp der Kristall Steak Döner Lieferdienst App" />
+  <link rel="stylesheet" href="assets/app.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">KD</div>
+        <div>
+          <strong>Kristall Steak Döner</strong>
+          <span>Lieferdienst App</span>
+        </div>
+      </div>
+      <button class="stamp-card" type="button" aria-label="Stempelkarte">
+        <span>🍔</span>
+        <strong id="stampCount">0/10</strong>
+        <small>Stempelkarte</small>
+      </button>
+    </header>
+
+    <main class="layout">
+      <section class="hero-card">
+        <div>
+          <p class="eyebrow">Online bestellen</p>
+          <h1>Bestellung</h1>
+          <p class="subtitle" id="shopSubtitle">Lieferung & Abholung möglich</p>
+        </div>
+        <div class="status-panel" id="statusPanel"></div>
+      </section>
+
+      <section class="order-mode-card">
+        <div class="mode-tabs" role="tablist" aria-label="Bestellart wählen">
+          <button type="button" class="mode-tab active" data-mode="delivery">🚲 Lieferung <small>45–65 min</small></button>
+          <button type="button" class="mode-tab" data-mode="pickup">🛍️ Abholung <small>ca. 15 min</small></button>
+        </div>
+        <div class="address-grid" id="addressPanel">
+          <label>
+            Liefergebiet
+            <select id="deliveryZone">
+              <option value="Kleinschwarzenlohe · 90530 · ab 12,00 €">Kleinschwarzenlohe · 90530 · ab 12,00 €</option>
+              <option value="Wendelstein · 90530 · ab 15,00 €">Wendelstein · 90530 · ab 15,00 €</option>
+              <option value="Röthenbach b. St. Wolfgang · ab 18,00 €">Röthenbach b. St. Wolfgang · ab 18,00 €</option>
+            </select>
+          </label>
+          <label>
+            Straße
+            <input id="street" value="Buchenstraße" placeholder="Straße eingeben" />
+          </label>
+        </div>
+      </section>
+
+      <section class="search-card">
+        <span>🔎</span>
+        <input id="searchInput" type="search" placeholder="Suche: Döner, Pizza, Cola …" />
+      </section>
+
+      <section class="content-grid">
+        <aside class="category-card">
+          <div class="section-title">Kategorien</div>
+          <div id="categoryList" class="category-list"></div>
+        </aside>
+
+        <section class="products-card">
+          <div class="products-head">
+            <div>
+              <h2 id="categoryTitle">Kristall Menüs</h2>
+              <p id="categorySubtitle">Wähle dein Menü</p>
+            </div>
+            <button id="adminOpen" class="ghost-btn" type="button">Admin / Ampel</button>
+          </div>
+          <div id="productList" class="product-list"></div>
+        </section>
+      </section>
+    </main>
+
+    <button id="cartBar" class="cart-bar" type="button">
+      <span>Jetzt Bestellung abschließen</span>
+      <strong id="cartBarTotal">0 Artikel · 0,00 €</strong>
+    </button>
+
+    <nav class="bottom-nav" aria-label="App Navigation">
+      <button type="button">🏠<span>Start</span></button>
+      <button type="button" class="active">🛍️<span>Bestellen</span></button>
+      <button type="button">👤<span>Konto</span></button>
+      <button type="button">%</button>
+      <button type="button">•••<span>Mehr</span></button>
+    </nav>
+  </div>
+
+  <aside id="cartDrawer" class="drawer" aria-hidden="true">
+    <div class="drawer-backdrop" data-close-drawer></div>
+    <div class="drawer-panel">
+      <div class="drawer-head">
+        <div>
+          <p class="eyebrow">Zusammenfassung</p>
+          <h2>Warenkorb</h2>
+        </div>
+        <button type="button" class="icon-btn" data-close-drawer>×</button>
+      </div>
+      <div id="cartItems" class="cart-items"></div>
+      <div class="totals" id="cartTotals"></div>
+      <label class="note-label">
+        Bemerkung zur Bestellung
+        <textarea id="orderNote" placeholder="z. B. bitte Soße getrennt, ohne Zwiebeln …"></textarea>
+      </label>
+      <button id="placeOrder" class="primary-btn" type="button">Bestellung absenden</button>
+      <p class="hint">Demo-Prototyp: Hier wird noch keine echte Bestellung an Küche/Server gesendet.</p>
+    </div>
+  </aside>
+
+  <aside id="adminDrawer" class="drawer" aria-hidden="true">
+    <div class="drawer-backdrop" data-close-admin></div>
+    <div class="drawer-panel admin-panel">
+      <div class="drawer-head">
+        <div>
+          <p class="eyebrow">Adminbereich</p>
+          <h2>Bestellstatus / Ampel</h2>
+        </div>
+        <button type="button" class="icon-btn" data-close-admin>×</button>
+      </div>
+
+      <div class="admin-grid">
+        <label class="switch-row"><span>Online-Bestellung</span><input id="adminOnline" type="checkbox" /></label>
+        <label class="switch-row"><span>Lieferung aktiv</span><input id="adminDelivery" type="checkbox" /></label>
+        <label class="switch-row"><span>Abholung aktiv</span><input id="adminPickup" type="checkbox" /></label>
+        <label class="switch-row"><span>Küche pausieren</span><input id="adminPaused" type="checkbox" /></label>
+        <label>Bestellstart heute<input id="adminOpenFrom" type="time" /></label>
+        <label>Bestellschluss heute<input id="adminOpenUntil" type="time" /></label>
+      </div>
+
+      <button id="saveAdmin" class="primary-btn" type="button">Ampel speichern</button>
+      <p class="hint">Diese Demo speichert lokal im Browser. In Produktion wird das mit PHP/MySQL oder einer API verbunden.</p>
+    </div>
+  </aside>
+
+  <template id="productTemplate">
+    <article class="product-row">
+      <img class="product-img" alt="" />
+      <div class="product-info">
+        <h3></h3>
+        <p></p>
+        <button type="button" class="info-link">ⓘ Mehr Info</button>
+        <strong class="price"></strong>
+      </div>
+      <button class="add-btn" type="button" aria-label="Hinzufügen">+</button>
+    </article>
+  </template>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>
