@@ -33,8 +33,8 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-    private static final String SHOP_URL = "https://kristall-doener-wendelstein.de/neu/bestellen/";
-    private static final String SHOP_HOST = "kristall-doener-wendelstein.de";
+    private static final String SHOP_URL = "https://bestellen.kristall-doener-wendelstein.de/index.php";
+    private static final String SHOP_HOST = "bestellen.kristall-doener-wendelstein.de";
     private static final int FILE_CHOOSER_REQUEST_CODE = 1001;
 
     private WebView webView;
@@ -172,7 +172,7 @@ public class MainActivity extends Activity {
         settings.setSupportMultipleWindows(false);
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
         settings.setMediaPlaybackRequiresUserGesture(false);
-        settings.setUserAgentString(settings.getUserAgentString() + " KristallDoenerApp/1.0");
+        settings.setUserAgentString(settings.getUserAgentString() + " KristallDoenerApp/1.1");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             settings.setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
